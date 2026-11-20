@@ -17,23 +17,23 @@ export function RecordForm({
 
   return (
     <form action={action} className="card mx-auto max-w-4xl">
-      <div className="border-b border-slate-200 px-6 py-4">
-        <h1 className="text-lg font-semibold text-ink">{id ? `Edit ${def.display(record) || def.label}` : `New ${def.label}`}</h1>
+      <div className="border-b border-slate-200 dark:border-slate-800 px-6 py-4">
+        <h1 className="text-lg font-semibold text-ink dark:text-slate-100">{id ? `Edit ${def.display(record) || def.label}` : `New ${def.label}`}</h1>
       </div>
       {returnTo && <input type="hidden" name="_return" value={returnTo} />}
       <div className="space-y-6 p-6">
-        {state.error && <p className="rounded-lg bg-rose-50 p-3 text-sm text-rose-700">{state.error}</p>}
+        {state.error && <p className="rounded-lg bg-rose-50 dark:bg-rose-500/10 p-3 text-sm text-rose-700 dark:text-rose-400">{state.error}</p>}
         {def.sections.map((s) => {
           const fields = s.fields.filter((f) => !(f.readOnly && !id));
           if (!fields.length) return null;
           return (
             <section key={s.title}>
-              <h2 className="mb-3 rounded-md bg-slate-100 px-3 py-1.5 text-sm font-semibold text-slate-700">{s.title}</h2>
+              <h2 className="mb-3 rounded-md bg-slate-100 dark:bg-slate-800 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:text-slate-300">{s.title}</h2>
               <div className="grid grid-cols-1 gap-x-6 gap-y-4 md:grid-cols-2">
                 {fields.map((f) => (
                   <div key={f.name} className={f.full ? "md:col-span-2" : ""}>
                     <label className="label" htmlFor={f.name}>
-                      {f.required && <span className="text-rose-600">* </span>}
+                      {f.required && <span className="text-rose-600 dark:text-rose-400">* </span>}
                       {f.label}
                     </label>
                     <Input field={f} value={record[f.name]} refOptions={refOptions} />
@@ -44,7 +44,7 @@ export function RecordForm({
           );
         })}
       </div>
-      <div className="flex justify-end gap-2 border-t border-slate-200 bg-slate-50 px-6 py-3">
+      <div className="flex justify-end gap-2 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 px-6 py-3">
         <Link href={cancel} className="btn">Cancel</Link>
         <SubmitButton>Save</SubmitButton>
       </div>
@@ -54,7 +54,7 @@ export function RecordForm({
 
 function Input({ field: f, value, refOptions }: { field: Field; value: any; refOptions: RefOptions }) {
   const common = { id: f.name, name: f.name, required: f.required, className: "input" };
-  if (f.readOnly) return <input {...common} name={undefined} defaultValue={value ?? ""} disabled className="input bg-slate-50" />;
+  if (f.readOnly) return <input {...common} name={undefined} defaultValue={value ?? ""} disabled className="input bg-slate-50 dark:bg-slate-800/50" />;
   switch (f.type) {
     case "textarea":
       return <textarea {...common} rows={4} defaultValue={value ?? ""} />;
@@ -75,7 +75,7 @@ function Input({ field: f, value, refOptions }: { field: Field; value: any; refO
     case "boolean":
       return (
         <div className="pt-1">
-          <input id={f.name} name={f.name} type="checkbox" defaultChecked={value ?? true} className="h-4 w-4 rounded border-slate-300 text-brand-600" />
+          <input id={f.name} name={f.name} type="checkbox" defaultChecked={value ?? true} className="h-4 w-4 rounded border-slate-300 dark:border-slate-700 text-brand-600 dark:text-brand-400" />
         </div>
       );
     case "date":

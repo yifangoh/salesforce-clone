@@ -12,19 +12,19 @@ export function StagePath({ id, stage }: { id: string; stage: string }) {
   const lost = current === "Closed Lost";
 
   return (
-    <div className={`flex w-full overflow-hidden rounded-full bg-slate-100 text-xs font-medium ${pending ? "opacity-70" : ""}`}>
+    <div className={`flex w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800 text-xs font-medium ${pending ? "opacity-70" : ""}`}>
       {STAGES.map((s, i) => {
         const done = i < idx && !(lost && s === "Closed Won");
         const active = s === current;
         const tone = active
           ? lost ? "bg-rose-600 text-white" : s === "Closed Won" ? "bg-emerald-600 text-white" : "bg-brand-600 text-white"
-          : done ? "bg-emerald-100 text-emerald-800" : "text-slate-600 hover:bg-slate-200";
+          : done ? "bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300" : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700";
         return (
           <button
             key={s}
             type="button"
             onClick={() => start(async () => { setCurrent(s); await updateStage(id, s); })}
-            className={`flex flex-1 items-center justify-center gap-1 px-2 py-2 transition ${tone} ${i ? "border-l border-white" : ""}`}
+            className={`flex flex-1 items-center justify-center gap-1 px-2 py-2 transition ${tone} ${i ? "border-l border-white dark:border-slate-900" : ""}`}
             title={`Mark as ${s}`}
           >
             {done && <Check size={12} />}

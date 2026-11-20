@@ -12,7 +12,7 @@ export function DeleteButton({ object, id }: { object: string; id: string }) {
   }
   return (
     <span className="inline-flex items-center gap-2">
-      <span className="text-sm text-slate-600">Delete this record?</span>
+      <span className="text-sm text-slate-600 dark:text-slate-400">Delete this record?</span>
       <button className="btn" onClick={() => setArmed(false)} disabled={pending}>Cancel</button>
       <button className="btn-danger" disabled={pending} onClick={() => start(() => deleteRecord(object, id))}>
         {pending ? "Deleting…" : "Confirm"}

@@ -45,17 +45,17 @@ export default async function Home() {
     <div className="space-y-4">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-semibold text-ink">Good {greeting()}, {firstName}</h1>
-          <p className="text-sm text-slate-500">{today.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}</p>
+          <h1 className="text-2xl font-semibold text-ink dark:text-slate-100">Good {greeting()}, {firstName}</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400">{today.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}</p>
         </div>
       </div>
 
       {empty && (
-        <div className="card flex flex-wrap items-center gap-4 border-brand-100 bg-brand-50 p-5">
-          <Database className="text-brand-600" />
+        <div className="card flex flex-wrap items-center gap-4 border-brand-100 dark:border-brand-500/30 bg-brand-50 dark:bg-brand-500/15 p-5">
+          <Database className="text-brand-600 dark:text-brand-400" />
           <div className="mr-auto">
-            <p className="font-medium text-ink">Your workspace is empty</p>
-            <p className="text-sm text-slate-600">Load sample accounts, contacts, leads, opportunities, cases and products to explore the app.</p>
+            <p className="font-medium text-ink dark:text-slate-100">Your workspace is empty</p>
+            <p className="text-sm text-slate-600 dark:text-slate-400">Load sample accounts, contacts, leads, opportunities, cases and products to explore the app.</p>
           </div>
           <form action={seedSampleData}><SubmitButton pendingText="Loading…">Load sample data</SubmitButton></form>
         </div>
@@ -72,19 +72,19 @@ export default async function Home() {
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
         <div className="card p-4 xl:col-span-2">
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-sm font-semibold text-ink">Pipeline by stage</h2>
+            <h2 className="text-sm font-semibold text-ink dark:text-slate-100">Pipeline by stage</h2>
             <Link href="/pipeline" className="link text-xs">View pipeline</Link>
           </div>
           <div className="space-y-3">
             {byStage.map((s) => (
               <div key={s.stage} className="grid grid-cols-[8rem_1fr_6rem] items-center gap-3 text-sm">
-                <span className="truncate text-slate-600">{s.stage}</span>
-                <div className="h-6 rounded bg-slate-100">
+                <span className="truncate text-slate-600 dark:text-slate-400">{s.stage}</span>
+                <div className="h-6 rounded bg-slate-100 dark:bg-slate-800">
                   <div className="flex h-6 items-center rounded bg-brand-500 px-2 text-xs font-medium text-white" style={{ width: `${Math.max(s.total ? 4 : 0, (s.total / maxStage) * 100)}%` }}>
                     {s.n > 0 && s.total / maxStage > 0.15 ? s.n : ""}
                   </div>
                 </div>
-                <span className="text-right font-medium tabular-nums text-slate-700">{formatCurrency(s.total, true)}</span>
+                <span className="text-right font-medium tabular-nums text-slate-700 dark:text-slate-300">{formatCurrency(s.total, true)}</span>
               </div>
             ))}
           </div>
@@ -92,7 +92,7 @@ export default async function Home() {
 
         <div className="card p-4">
           <div className="mb-3 flex items-center justify-between">
-            <h2 className="text-sm font-semibold text-ink">My open tasks</h2>
+            <h2 className="text-sm font-semibold text-ink dark:text-slate-100">My open tasks</h2>
             <Link href="/activities/new" className="link text-xs">New task</Link>
           </div>
           <ul className="space-y-2">
@@ -100,60 +100,60 @@ export default async function Home() {
               <li key={t.id} className="flex items-start gap-2">
                 <ActivityCheckbox id={t.id} done={false} path="/" />
                 <div className="min-w-0">
-                  <Link href={`/activities/${t.id}`} className="block truncate text-sm text-brand-600 hover:underline">{t.subject}</Link>
-                  <p className={`text-xs ${t.due_date && t.due_date < todayStr ? "font-medium text-rose-600" : "text-slate-500"}`}>
+                  <Link href={`/activities/${t.id}`} className="block truncate text-sm text-brand-600 dark:text-brand-400 hover:underline">{t.subject}</Link>
+                  <p className={`text-xs ${t.due_date && t.due_date < todayStr ? "font-medium text-rose-600 dark:text-rose-400" : "text-slate-500 dark:text-slate-400"}`}>
                     {t.type}{t.due_date ? ` · ${formatDate(t.due_date)}` : ""}
                   </p>
                 </div>
               </li>
             ))}
-            {!tasks.data?.length && <li className="text-sm text-slate-400">Nothing due. Nice work.</li>}
+            {!tasks.data?.length && <li className="text-sm text-slate-400 dark:text-slate-500">Nothing due. Nice work.</li>}
           </ul>
         </div>
       </div>
 
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
         <div className="card overflow-hidden xl:col-span-2">
-          <div className="flex items-center justify-between border-b border-slate-200 px-4 py-3">
-            <h2 className="text-sm font-semibold text-ink">Closing in the next 30 days</h2>
+          <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 px-4 py-3">
+            <h2 className="text-sm font-semibold text-ink dark:text-slate-100">Closing in the next 30 days</h2>
             <Link href="/opportunities" className="link text-xs">All opportunities</Link>
           </div>
-          <table className="min-w-full divide-y divide-slate-100">
-            <tbody className="divide-y divide-slate-100">
+          <table className="min-w-full divide-y divide-slate-100 dark:divide-slate-800">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {closingSoon.map((o) => (
                 <tr key={o.id}>
-                  <td className="td"><Link className="link font-medium" href={`/opportunities/${o.id}`}>{o.name}</Link><p className="text-xs text-slate-500">{o.account?.name}</p></td>
+                  <td className="td"><Link className="link font-medium" href={`/opportunities/${o.id}`}>{o.name}</Link><p className="text-xs text-slate-500 dark:text-slate-400">{o.account?.name}</p></td>
                   <td className="td"><Badge value={o.stage} /></td>
-                  <td className={`td ${o.close_date < todayStr ? "text-rose-600" : ""}`}>{formatDate(o.close_date)}</td>
+                  <td className={`td ${o.close_date < todayStr ? "text-rose-600 dark:text-rose-400" : ""}`}>{formatDate(o.close_date)}</td>
                   <td className="td text-right font-medium tabular-nums">{formatCurrency(o.amount)}</td>
                 </tr>
               ))}
-              {closingSoon.length === 0 && <tr><td className="td text-slate-400">No deals closing soon.</td></tr>}
+              {closingSoon.length === 0 && <tr><td className="td text-slate-400 dark:text-slate-500">No deals closing soon.</td></tr>}
             </tbody>
           </table>
         </div>
 
         <div className="space-y-4">
           <div className="card p-4">
-            <h2 className="mb-3 text-sm font-semibold text-ink">Leads by status</h2>
+            <h2 className="mb-3 text-sm font-semibold text-ink dark:text-slate-100">Leads by status</h2>
             <div className="space-y-2">
               {leadByStatus.map(({ s, n }) => (
-                <Link key={s} href={`/leads?filter=${s}`} className="flex items-center justify-between rounded-md px-2 py-1 text-sm hover:bg-slate-50">
+                <Link key={s} href={`/leads?filter=${s}`} className="flex items-center justify-between rounded-md px-2 py-1 text-sm hover:bg-slate-50 dark:hover:bg-slate-800/50">
                   <Badge value={s} /><span className="font-medium tabular-nums">{n}</span>
                 </Link>
               ))}
             </div>
           </div>
           <div className="card p-4">
-            <h2 className="mb-3 text-sm font-semibold text-ink">Recent open cases</h2>
+            <h2 className="mb-3 text-sm font-semibold text-ink dark:text-slate-100">Recent open cases</h2>
             <ul className="space-y-2">
               {openCases.slice(0, 5).map((c) => (
                 <li key={c.id} className="flex items-center justify-between gap-2">
-                  <Link href={`/cases/${c.id}`} className="truncate text-sm text-brand-600 hover:underline">{c.case_number} · {c.subject}</Link>
+                  <Link href={`/cases/${c.id}`} className="truncate text-sm text-brand-600 dark:text-brand-400 hover:underline">{c.case_number} · {c.subject}</Link>
                   <Badge value={c.priority} />
                 </li>
               ))}
-              {!openCases.length && <li className="text-sm text-slate-400">No open cases.</li>}
+              {!openCases.length && <li className="text-sm text-slate-400 dark:text-slate-500">No open cases.</li>}
             </ul>
           </div>
         </div>
@@ -164,10 +164,10 @@ export default async function Home() {
 
 function Kpi({ label, value, sub, href }: { label: string; value: string; sub: string; href: string }) {
   return (
-    <Link href={href} className="card block p-4 transition hover:border-brand-200 hover:shadow">
-      <p className="text-xs font-medium text-slate-500">{label}</p>
-      <p className="mt-1 text-2xl font-semibold text-ink tabular-nums">{value}</p>
-      <p className="text-xs text-slate-500">{sub}</p>
+    <Link href={href} className="card block p-4 transition hover:border-brand-200 dark:hover:border-brand-500/40 hover:shadow">
+      <p className="text-xs font-medium text-slate-500 dark:text-slate-400">{label}</p>
+      <p className="mt-1 text-2xl font-semibold text-ink dark:text-slate-100 tabular-nums">{value}</p>
+      <p className="text-xs text-slate-500 dark:text-slate-400">{sub}</p>
     </Link>
   );
 }

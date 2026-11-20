@@ -1,4 +1,5 @@
 import { Logo } from "@/components/logo";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -11,7 +12,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         </div>
         <p className="text-sm text-blue-200">Powered by Supabase · Deployed on Vercel</p>
       </div>
-      <div className="flex w-full items-center justify-center p-6 lg:w-1/2">
+      <div className="relative flex w-full items-center justify-center p-6 lg:w-1/2">
+        <ThemeToggle className="absolute top-4 right-4" />
         <div className="w-full max-w-sm">{children}</div>
       </div>
     </div>

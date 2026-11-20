@@ -18,6 +18,7 @@ A multi-tenant CRM in the spirit of Salesforce Sales & Service Cloud, built with
 | **Home dashboard** | Open & weighted pipeline, won this quarter, win rate, pipeline by stage, closing soon, my tasks, leads by status, open cases |
 | **Global search** | Across accounts, contacts, leads, opportunities and cases |
 | **Multi-tenancy** | Every signup creates its own organization; RLS isolates all data per org |
+| **Dark mode** | Light / dark / system theme toggle in the header (and on login/signup), remembered per browser, no flash on load |
 | **Sample data** | One-click "Load sample data" on an empty workspace |
 
 The UI is **metadata-driven**: each object is described once in [`lib/objects.ts`](lib/objects.ts) (fields, picklists, list columns, related lists), and the generic list, detail and form pages render from that config. To add a field: add a column in a migration, then add it to the object's `sections`.

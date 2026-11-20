@@ -24,10 +24,10 @@ export default async function PipelinePage({ searchParams }: { searchParams: Pro
       <div className="card flex flex-wrap items-center gap-3 p-4">
         <ObjectIcon name="Target" color="bg-orange-500" size="lg" />
         <div className="mr-auto">
-          <p className="text-xs font-medium text-slate-500">Opportunities</p>
-          <h1 className="text-lg font-semibold text-ink">Pipeline</h1>
+          <p className="text-xs font-medium text-slate-500 dark:text-slate-400">Opportunities</p>
+          <h1 className="text-lg font-semibold text-ink dark:text-slate-100">Pipeline</h1>
         </div>
-        <p className="hidden text-xs text-slate-500 md:block">Drag cards between columns to change the stage.</p>
+        <p className="hidden text-xs text-slate-500 dark:text-slate-400 md:block">Drag cards between columns to change the stage.</p>
         <Link href={sp.mine === "1" ? "/pipeline" : "/pipeline?mine=1"} className="btn">{sp.mine === "1" ? "All opportunities" : "My opportunities"}</Link>
         <Link href="/opportunities" className="btn"><List size={16} /> List</Link>
         <Link href="/opportunities/new?return_to=/pipeline" className="btn-primary"><Plus size={16} /> New</Link>

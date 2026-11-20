@@ -13,16 +13,16 @@ export function ConvertForm({ lead, accounts }: { lead: any; accounts: { id: str
 
   return (
     <form action={action} className="card mx-auto max-w-2xl">
-      <div className="border-b border-slate-200 px-6 py-4">
-        <h1 className="text-lg font-semibold text-ink">Convert Lead: {name}</h1>
-        <p className="text-sm text-slate-500">Creates a contact, links or creates an account, and optionally opens an opportunity.</p>
+      <div className="border-b border-slate-200 dark:border-slate-800 px-6 py-4">
+        <h1 className="text-lg font-semibold text-ink dark:text-slate-100">Convert Lead: {name}</h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400">Creates a contact, links or creates an account, and optionally opens an opportunity.</p>
       </div>
       <input type="hidden" name="lead_id" value={lead.id} />
       <input type="hidden" name="account_mode" value={mode} />
       <div className="space-y-5 p-6">
-        {state.error && <p className="rounded-lg bg-rose-50 p-3 text-sm text-rose-700">{state.error}</p>}
+        {state.error && <p className="rounded-lg bg-rose-50 dark:bg-rose-500/10 p-3 text-sm text-rose-700 dark:text-rose-400">{state.error}</p>}
 
-        <section className="rounded-lg border border-slate-200 p-4">
+        <section className="rounded-lg border border-slate-200 dark:border-slate-800 p-4">
           <h2 className="mb-3 text-sm font-semibold">Account</h2>
           <label className="flex items-center gap-2 text-sm">
             <input type="radio" checked={mode === "new"} onChange={() => setMode("new")} /> Create new account: <b>{lead.company}</b>
@@ -37,12 +37,12 @@ export function ConvertForm({ lead, accounts }: { lead: any; accounts: { id: str
           )}
         </section>
 
-        <section className="rounded-lg border border-slate-200 p-4">
+        <section className="rounded-lg border border-slate-200 dark:border-slate-800 p-4">
           <h2 className="mb-1 text-sm font-semibold">Contact</h2>
-          <p className="text-sm text-slate-600">A new contact <b>{name}</b> will be created{lead.email ? ` (${lead.email})` : ""}.</p>
+          <p className="text-sm text-slate-600 dark:text-slate-400">A new contact <b>{name}</b> will be created{lead.email ? ` (${lead.email})` : ""}.</p>
         </section>
 
-        <section className="rounded-lg border border-slate-200 p-4">
+        <section className="rounded-lg border border-slate-200 dark:border-slate-800 p-4">
           <h2 className="mb-3 text-sm font-semibold">Opportunity</h2>
           <label className="flex items-center gap-2 text-sm">
             <input type="checkbox" name="create_opportunity" checked={createOpp} onChange={(e) => setCreateOpp(e.target.checked)} />
@@ -53,7 +53,7 @@ export function ConvertForm({ lead, accounts }: { lead: any; accounts: { id: str
           )}
         </section>
       </div>
-      <div className="flex justify-end gap-2 border-t border-slate-200 bg-slate-50 px-6 py-3">
+      <div className="flex justify-end gap-2 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 px-6 py-3">
         <Link href={`/leads/${lead.id}`} className="btn">Cancel</Link>
         <SubmitButton pendingText="Converting…">Convert</SubmitButton>
       </div>

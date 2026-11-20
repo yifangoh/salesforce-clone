@@ -46,5 +46,5 @@ export function FieldValue({ field, record }: { field: Field; record: Record<str
 }
 
 function Empty() {
-  return <span className="text-slate-300">—</span>;
+  return <span className="text-slate-300 dark:text-slate-600">—</span>;
 }

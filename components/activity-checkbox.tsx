@@ -15,7 +15,7 @@ export function ActivityCheckbox({ id, done, path }: { id: string; done: boolean
         const v = e.target.checked;
         start(async () => { setChecked(v); await toggleActivity(id, v, path); });
       }}
-      className="mt-1 h-4 w-4 cursor-pointer rounded border-slate-300 text-emerald-600"
+      className="mt-1 h-4 w-4 cursor-pointer rounded border-slate-300 dark:border-slate-700 text-emerald-600 dark:text-emerald-400"
     />
   );
 }
